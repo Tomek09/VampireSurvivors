@@ -11,7 +11,10 @@ namespace Assets.Scripts {
 
 		public void Tick(float deltaTime, float3 desinationPoint) {
 			float3 direction = desinationPoint - transform.ValueRO.Position;
-			transform.ValueRW = transform.ValueRW.Translate(direction * movement.ValueRO.MoveSpeed * deltaTime);
+			direction = math.normalizesafe(direction);
+
+			float3 newPosition = transform.ValueRO.Position + direction * movement.ValueRO.MoveSpeed * deltaTime;
+			transform.ValueRW.Position = newPosition;
 		}
 	}
 }

@@ -1,32 +1,37 @@
-﻿using Unity.Entities;
+﻿using Unity.Burst;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace Assets.Scripts {
 	public partial struct WaveManagerSystem : ISystem {
 
-		private WaveManager _waveManager;
-		private float _nextSpawnTime;
+		private float _delay;
 
-		public void OnCreate(ref SystemState state) {
-			_waveManager = SystemAPI.GetSingleton<WaveManager>();
-			RefreshTimer();
-		}
-
+		[BurstCompile]
 		public void OnUpdate(ref SystemState state) {
-			_nextSpawnTime -= SystemAPI.Time.DeltaTime;
-			if (_nextSpawnTime <= 0) {
-				RefreshTimer();
-				SpawnEnemies();
+			if (!SystemAPI.TryGetSingleton(out WaveManager waveManager)) {
+				return;
+			}
+
+			_delay -= SystemAPI.Time.DeltaTime;
+			if (_delay <= 0) {
+				RefreshTimer(ref waveManager);
+				SpawnEnemies(ref state, ref waveManager);
 			}
 		}
 
-		private void RefreshTimer() {
-			_nextSpawnTime = _waveManager.SpawnDelay;
-		}
+		private void RefreshTimer(ref WaveManager waveManager) => _delay = waveManager.SpawnTime;
 
-		private void SpawnEnemies() {
-			Entity enemyPrefab = _waveManager.GetRandomEnemy();
-			Entity spawnedEntity = EntityManager.Instantiate(enemyPrefab);
+		private void SpawnEnemies(ref SystemState state, ref WaveManager waveManager) {
+			Entity prefab = waveManager.GetPrefab();
+			Entity enemy = state.EntityManager.Instantiate(prefab);
+			state.EntityManager.SetComponentData(enemy, new LocalTransform {
+				Position = waveManager.GetSpawnPosition(),
+				Rotation = quaternion.identity,
+				Scale = 1f
+			});
 		}
 	}
 }

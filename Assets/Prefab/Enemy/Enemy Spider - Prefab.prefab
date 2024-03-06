@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1273242330, guid: 0d5ebda60efce764bb4aeb906287395d, type: 3}
+  m_Sprite: {fileID: -185620770, guid: 0d5ebda60efce764bb4aeb906287395d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8118636539787740672}
   - component: {fileID: 6238958076549785699}
   m_Layer: 0
-  m_Name: Enemy Ghost - Prefab
+  m_Name: Enemy Spider - Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
