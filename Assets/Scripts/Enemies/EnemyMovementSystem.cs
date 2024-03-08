@@ -1,4 +1,6 @@
-﻿using Unity.Entities;
+﻿using Assets.Scripts.Base;
+using Unity.Burst;
+using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
@@ -16,14 +18,28 @@ namespace Assets.Scripts.Enemies {
 		}
 
 		public void OnUpdate(ref SystemState state) {
+			float deltaTime = SystemAPI.Time.DeltaTime;
 			float3 desination = SystemAPI.GetComponent<LocalTransform>(_playerEntity).Position;
 
-			foreach (EnemyMovementAspect aspect in SystemAPI.Query<EnemyMovementAspect>().WithAll<EnemyTag>()) {
-				float deltaTime = SystemAPI.Time.DeltaTime;
-				aspect.Tick(deltaTime, desination);
-			}
+			new EnemyMoveJob {
+				DeltaTime = deltaTime,
+				PlayerPosition = desination
+			}.ScheduleParallel();
 		}
 
 		public void OnStopRunning(ref SystemState state) { }
+
+		[BurstCompile]
+		[WithAll(typeof(EnemyTag))]
+		public partial struct EnemyMoveJob : IJobEntity {
+			public float DeltaTime;
+			public float3 PlayerPosition;
+
+			[BurstCompile]
+			private void Execute(ref LocalTransform transform, in BaseMoveSpeed moveSpeed) {
+				float3 direction = math.normalizesafe(PlayerPosition - transform.Position);
+				transform.Position += direction * moveSpeed.Value * DeltaTime;
+			}
+		}
 	}
 }

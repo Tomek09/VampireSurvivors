@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using Unity.Burst;
+using Unity.Entities;
 
 namespace Assets.Scripts.Players {
 	public partial struct PlayerMovementSystem : ISystem {
@@ -7,10 +8,11 @@ namespace Assets.Scripts.Players {
 			state.RequireForUpdate<PlayerTag>();
 		}
 
+		[BurstCompile]
 		public void OnUpdate(ref SystemState state) {
-			foreach (PlayerMovementAspect aspect in SystemAPI.Query<PlayerMovementAspect>().WithAll<PlayerTag>()) {
-				float deltaTime = SystemAPI.Time.DeltaTime;
-				aspect.Tick(deltaTime);
+			float deltaTime = SystemAPI.Time.DeltaTime;
+			foreach (PlayerMovementAspect playerMove in SystemAPI.Query<PlayerMovementAspect>()) {
+				playerMove.Tick(deltaTime);
 			}
 		}
 	}
