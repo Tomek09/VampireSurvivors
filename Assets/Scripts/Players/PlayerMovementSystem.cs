@@ -9,7 +9,6 @@ namespace Assets.Scripts.Players {
 
 		public void OnUpdate(ref SystemState state) {
 			foreach (PlayerMovementAspect aspect in SystemAPI.Query<PlayerMovementAspect>().WithAll<PlayerTag>()) {
-
 				float deltaTime = SystemAPI.Time.DeltaTime;
 				aspect.Tick(deltaTime);
 			}

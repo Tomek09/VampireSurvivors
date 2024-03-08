@@ -10,7 +10,7 @@ namespace Assets.Scripts.Players {
 		public readonly RefRO<PlayerMoveSpeed> moveSpeed;
 
 		public void Tick(float deltaTime) {
-			float2 inputValue = input.ValueRO.Value;
+			float2 inputValue = input.ValueRO.MoveInput;
 			HandleMovement(inputValue, deltaTime);
 			HandleRotation(inputValue);
 		}

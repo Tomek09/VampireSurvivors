@@ -1,5 +1,5 @@
 ﻿using Unity.Entities;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace Assets.Scripts.Projectiles {
 
@@ -8,5 +8,4 @@ namespace Assets.Scripts.Projectiles {
 	public struct ProjectileMoveSpeed : IComponentData {
 		public float Value;
 	}
-
 }
