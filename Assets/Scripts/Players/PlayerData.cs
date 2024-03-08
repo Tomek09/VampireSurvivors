@@ -11,13 +11,9 @@ namespace Assets.Scripts.Players {
 		public float2 LastMoveInput;
 	}
 
-	public struct PlayerMoveSpeed : IComponentData {
-		public float Value;
-	}
-
 	public struct PlayerWeapon : IComponentData {
 		public Entity Prefab;
-		public float FireRate;
-		public float CurrentFireRate;
+		public float AttackInterval;
+		public float Timer;
 	}
 }

@@ -12,16 +12,16 @@ namespace Assets.Scripts.Players {
 		public readonly RefRW<PlayerWeapon> weapon;
 
 		public void Tick(float deltaTime) {
-			if (weapon.ValueRO.CurrentFireRate > 0) {
-				weapon.ValueRW.CurrentFireRate -= deltaTime;
+			if (weapon.ValueRO.Timer > 0) {
+				weapon.ValueRW.Timer -= deltaTime;
 			}
 		}
 
 		public void RestartTimer() {
-			weapon.ValueRW.CurrentFireRate = weapon.ValueRO.FireRate;
+			weapon.ValueRW.Timer = weapon.ValueRO.AttackInterval;
 		}
 
-		public bool IsReady() => weapon.ValueRO.CurrentFireRate <= 0f;
+		public bool IsReady() => weapon.ValueRO.Timer <= 0f;
 
 		public quaternion GetProjecitleRotation() {
 			float2 inputValue = input.ValueRO.LastMoveInput;

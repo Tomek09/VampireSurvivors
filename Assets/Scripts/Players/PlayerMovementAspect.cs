@@ -7,7 +7,7 @@ namespace Assets.Scripts.Players {
 
 		public readonly RefRW<LocalTransform> transform;
 		public readonly RefRO<PlayerInput> input;
-		public readonly RefRO<PlayerMoveSpeed> moveSpeed;
+		public readonly RefRO<Base.BaseMoveSpeed> moveSpeed;
 
 		public void Tick(float deltaTime) {
 			float2 inputValue = input.ValueRO.MoveInput;

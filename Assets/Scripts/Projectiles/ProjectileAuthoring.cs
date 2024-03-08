@@ -13,7 +13,7 @@ namespace Assets.Scripts.Projectiles {
 				Entity entity = GetEntity(TransformUsageFlags.Dynamic);
 
 				AddComponent<ProjectileTag>(entity);
-				AddComponent(entity, new ProjectileMoveSpeed { Value = authoring.MoveSpeed });
+				AddComponent(entity, new Base.BaseMoveSpeed { Value = authoring.MoveSpeed });
 			}
 		}
 	}

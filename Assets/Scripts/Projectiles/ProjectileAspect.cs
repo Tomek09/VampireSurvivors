@@ -6,7 +6,7 @@ namespace Assets.Scripts.Projectiles {
 	public readonly partial struct ProjectileAspect : IAspect {
 
 		public readonly RefRW<LocalTransform> transform;
-		public readonly RefRO<ProjectileMoveSpeed> moveSpeed;
+		public readonly RefRO<Base.BaseMoveSpeed> moveSpeed;
 
 		public void Tick(float deltaTime) {
 			float3 direction = transform.ValueRO.Up();

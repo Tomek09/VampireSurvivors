@@ -14,11 +14,11 @@ namespace Assets.Scripts.Players {
 
 				AddComponent<PlayerTag>(entity);
 				AddComponent<PlayerInput>(entity);
-				AddComponent(entity, new PlayerMoveSpeed { Value = authoring._moveSpeed });
+				AddComponent(entity, new Base.BaseMoveSpeed { Value = authoring._moveSpeed });
 				AddComponent(entity, new PlayerWeapon {
 					Prefab = GetEntity(authoring._projectilePrefab, TransformUsageFlags.Dynamic),
-					FireRate = authoring._projectilePrefab.FireRate,
-					CurrentFireRate = authoring._projectilePrefab.FireRate
+					AttackInterval = authoring._projectilePrefab.FireRate,
+					Timer = authoring._projectilePrefab.FireRate
 				});
 
 			}
