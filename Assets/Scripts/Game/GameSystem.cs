@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using Unity.Burst;
-using Unity.Entities;
-using UnityEngine;
+﻿using Unity.Entities;
 
 namespace Assets.Scripts.Game {
 	public partial struct GameSystem : ISystem {

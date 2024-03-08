@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using Unity.Entities;
+﻿using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace Assets.Scripts.Players {
 	public readonly partial struct PlayerWeaponAspect : IAspect {
