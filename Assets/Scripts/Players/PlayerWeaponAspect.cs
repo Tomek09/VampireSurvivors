@@ -17,16 +17,18 @@ namespace Assets.Scripts.Players {
 			}
 		}
 
-		public void RestartTimer() {
-			weapon.ValueRW.Timer = weapon.ValueRO.AttackInterval;
-		}
+		public void RestartTimer() => weapon.ValueRW.Timer = weapon.ValueRO.AttackInterval;
 
 		public bool IsReady() => weapon.ValueRO.Timer <= 0f;
 
 		public quaternion GetProjecitleRotation() {
-			float2 inputValue = input.ValueRO.LastMoveInput;
-			float3 up = new float3(inputValue.x, inputValue.y, 0f);
 
+			float2 inputValue = input.ValueRO.LastMoveInput;
+			if(Equals(inputValue, float2.zero)) {
+				return quaternion.identity;
+			}
+
+			float3 up = new float3(inputValue.x, inputValue.y, 0f);
 			quaternion rotation = quaternion.LookRotation(new float3(0f, 0f, 1f), up);
 			return rotation;
 

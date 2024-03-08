@@ -1,6 +1,5 @@
 ﻿using Unity.Collections;
 using Unity.Entities;
-using UnityEngine;
 
 namespace Assets.Scripts.Base {
 	public partial struct DestroyByTimeSystem : ISystem {

@@ -1,7 +1,6 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Assets.Scripts.Players {
 	public partial class PlayerInputSystem : SystemBase {
@@ -13,6 +12,7 @@ namespace Assets.Scripts.Players {
 			RequireForUpdate<PlayerTag>();
 
 			_inputActions = new Inputs.GameControls();
+			_lastMoveInput = new float2(1f, 0f);
 		}
 
 		protected override void OnStartRunning() {
