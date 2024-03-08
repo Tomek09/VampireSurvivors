@@ -6,6 +6,8 @@ namespace Assets.Scripts.Players {
 
 		[Header("Values")]
 		[SerializeField] private float _moveSpeed = 5f;
+
+		[Header("Weapon")]
 		[SerializeField] private Projectiles.ProjectileAuthoring _projectilePrefab = null;
 
 		private class Baker : Baker<PlayerAuthoring> {
@@ -17,8 +19,8 @@ namespace Assets.Scripts.Players {
 				AddComponent(entity, new Base.BaseMoveSpeed { Value = authoring._moveSpeed });
 				AddComponent(entity, new PlayerWeapon {
 					Prefab = GetEntity(authoring._projectilePrefab, TransformUsageFlags.Dynamic),
-					AttackInterval = authoring._projectilePrefab.FireRate,
-					Timer = authoring._projectilePrefab.FireRate
+					AttackInterval = authoring._projectilePrefab.AttackInterval,
+					Timer = 0f
 				});
 
 			}

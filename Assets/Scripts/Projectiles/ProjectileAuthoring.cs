@@ -5,8 +5,9 @@ namespace Assets.Scripts.Projectiles {
 	public class ProjectileAuthoring : MonoBehaviour {
 
 		[field: Header("Values")]
-		[field: SerializeField] public float FireRate { get; private set; }
+		[field: SerializeField] public float AttackInterval { get; private set; }
 		[field: SerializeField] public float MoveSpeed { get; private set; }
+		[field: SerializeField] public float LifeTime { get; private set; }
 
 		private class Baker : Baker<ProjectileAuthoring> {
 			public override void Bake(ProjectileAuthoring authoring) {
@@ -14,6 +15,7 @@ namespace Assets.Scripts.Projectiles {
 
 				AddComponent<ProjectileTag>(entity);
 				AddComponent(entity, new Base.BaseMoveSpeed { Value = authoring.MoveSpeed });
+				AddComponent(entity, new Base.DestroyByTime { Value = authoring.LifeTime });
 			}
 		}
 	}
